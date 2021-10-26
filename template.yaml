@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Accelerate example
+
+Globals:
+  Function:
+    Timeout: 3
+    Tracing: Active
+
+Resources:
+  BaseApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      EndpointConfiguration: REGIONAL
+      TracingEnabled: true
+      MethodSettings:
+        - LoggingLevel: INFO
+          HttpMethod: "*"
+          ResourcePath: "/*"
+
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: hello_world/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+            RestApiId: !Ref BaseApi
+
+  GreetingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: greeting/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Events:
+        Greeting:
+          Type: Api
+          Properties:
+            Path: /greeting
+            Method: get
+            RestApiId: !Ref BaseApi
+
+Outputs:
+  HelloWorldApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${BaseApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello"
+  GreetingApi:
+    Description: "API Gateway endpoint URL for Prod stage for Greeting function"
+    Value: !Sub "https://${BaseApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/greeting"
