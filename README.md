@@ -29,5 +29,5 @@ mkdir blog && cd blog
 sam init
 ```
 * Select option 2: **Custome Template Location**
-* Enter this repo `https://github.com/aws-samples/sam-accelerate-demo` as the location
+* Enter this repo `https://github.com/aws-samples/aws-sam-accelerate-demo` as the location
 * Read this blog for instructions: [https://aws.amazon.com/blogs/compute/accelerating-serverless-development-with-aws-sam-accelerate/](https://aws.amazon.com/blogs/compute/accelerating-serverless-development-with-aws-sam-accelerate/)
