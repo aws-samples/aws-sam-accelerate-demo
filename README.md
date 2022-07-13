@@ -16,7 +16,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
 # SAM Accelerate demo application.
 
 ## Requirements
-* [SAM Accelerate](https//s12d.com/accelerate)
+* [SAM Accelerate](https://s12d.com/accelerate)
 * Python 3.9
 
 ## Installation
